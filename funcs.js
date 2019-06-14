@@ -1,7 +1,7 @@
 var finalOutputs = [];
 var effects = [];
 
-function findActualCause() {
+function causeAnchor1() {
   var alpha;
   if (effects.length == 2) {
     alpha = 0.1922
@@ -15,8 +15,42 @@ function findActualCause() {
     alpha = 0.1636;
     network.nodes[9].causeLevel = alpha;
   }
-  alphaBox.html('α = ' + str(alpha));  
+  alphaBox.html('α = ' + str(alpha));
 }
+
+function causeAnchor2() {
+  var alpha;
+  if (effects.length == 2) {
+    alpha = 0.2839
+    network.nodes[3].causeLevel = alpha;
+    network.nodes[6].causeLevel = alpha;
+    network.nodes[7].causeLevel = alpha;
+  } else if (effects[0] == 'Node 1') {
+    alpha = 0.5456;
+    network.nodes[0].causeLevel = alpha; //remember outputs are switched from TF model
+  } else if (effects[0] == 'Node 2') {
+    alpha = 0.8022;
+    network.nodes[9].causeLevel = alpha;
+  }
+  alphaBox.html('α = ' + str(alpha));
+}
+
+// function findActualCause() {
+//   var alpha;
+//   if (effects.length == 2) {
+//     alpha = 0.1922
+//     network.nodes[1].causeLevel = alpha;
+//     network.nodes[7].causeLevel = alpha;
+//     network.nodes[9].causeLevel = alpha;
+//   } else if (effects[0] == 'Node 1') {
+//     alpha = 0.4656;
+//     network.nodes[8].causeLevel = alpha; //remember outputs are switched from TF model
+//   } else if (effects[0] == 'Node 2') {
+//     alpha = 0.1636;
+//     network.nodes[9].causeLevel = alpha;
+//   }
+//   alphaBox.html('α = ' + str(alpha));  
+// }
 
 function clearCauses() {
   for (i=0;i<network.nodes.length;i++) {
@@ -51,8 +85,10 @@ function mousePressed() {
   if (effects.length > 0) {
     nodeStrings = effects.join(' and ');
     causationButton.show();
+    causationButton2.show();
   } else {
     causationButton.hide();
+    causationButton2.hide();
   }
   causationBody.html('Selected nodes: ' + nodeStrings);
 }

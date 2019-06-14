@@ -45,16 +45,21 @@ function setup() {
   result = createElement('h3', '');
   result.position(400, 100);
 
-  causationTitle = createElement('h2', 'Actual Causation (1,0,1,0,1,1,0,1,1,0)');
+  causationTitle = createElement('h2', 'Actual Causation');
   causationTitle.position(950, 30);
 
   causationBody = createElement('p', '');
   causationBody.position(950, 100);
 
-  causationButton = createButton('Find Causes of Selected Nodes');
+  causationButton = createButton('Find Causes with 1,0,1,0,1,1,0,1,1,0');
   causationButton.position(950, 150);
-  causationButton.mousePressed(findActualCause);
+  causationButton.mousePressed(causeAnchor1);
   causationButton.hide();
+
+  causationButton2 = createButton('Find Causes with 1,0,1,0,1,1,0,0,0,1');
+  causationButton2.position(1150, 150);
+  causationButton2.mousePressed(causeAnchor2);
+  causationButton2.hide();
 
   alphaBox = createElement('h4', '');
   alphaBox.position(950, 170);
