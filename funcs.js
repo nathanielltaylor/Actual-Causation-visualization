@@ -47,12 +47,14 @@ function mousePressed() {
       effects = effects.filter(w => w != 'Node 2');
     }
   }
-  causationBody.html(effects.join(' '));
+  var nodeStrings = 'None';
   if (effects.length > 0) {
+    nodeStrings = effects.join(' and ');
     causationButton.show();
   } else {
     causationButton.hide();
   }
+  causationBody.html('Selected nodes: ' + nodeStrings);
 }
 
 function run() {
