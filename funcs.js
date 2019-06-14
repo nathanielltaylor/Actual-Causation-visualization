@@ -2,6 +2,7 @@ var finalOutputs = [];
 var effects = [];
 
 function causeAnchor1() {
+  clearCauses();
   var alpha;
   if (effects.length == 2) {
     alpha = 0.1922
@@ -19,6 +20,7 @@ function causeAnchor1() {
 }
 
 function causeAnchor2() {
+  clearCauses();
   var alpha;
   if (effects.length == 2) {
     alpha = 0.2839

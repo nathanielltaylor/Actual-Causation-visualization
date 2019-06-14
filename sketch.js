@@ -32,18 +32,21 @@ function setup() {
   background('#eee');
 
   input = createInput();
-  input.position(400, 85);
+  input.position(400, 115);
 
   button = createButton('Submit');
   button.id('submit_button')
-  button.position(input.x + input.width, 85);
+  button.position(input.x + input.width, 115);
   button.mousePressed(run);
 
-  title = createElement('h3', 'Enter 10 comma-separated binary digits');
-  title.position(400, 30);
+  title = createElement('h4', 'Enter 10 comma-separated binary digits');
+  title.position(400, 60);
 
-  result = createElement('h3', '');
-  result.position(400, 100);
+  classTitle = createElement('h2', 'Sample classification');
+  classTitle.position(400, 30);
+
+  result = createElement('h4', '');
+  result.position(400, 120);
 
   causationTitle = createElement('h2', 'Actual Causation');
   causationTitle.position(950, 30);
