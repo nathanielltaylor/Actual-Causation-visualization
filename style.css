@@ -1,7 +1,19 @@
 html, body {
     margin: 0;
     padding: 0;
+    color: #657b83;
+    font-family: Roboto,Lato,'Helvetica Neue',Helvetica,sans-serif;
+    background-color: #eee;
+  }
+  button {
+    background: #2aa198;
+    border-radius: 25px;
+    color: white;
+  }
+  #submit_button {
+    margin-left: 15px; 
   }
   canvas {
     display: block;
+    background-color: #eee;
   }
