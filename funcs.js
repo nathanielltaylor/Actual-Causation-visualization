@@ -2,7 +2,43 @@ var finalOutputs = [];
 var effects = [];
 
 function findActualCause() {
-  alert(effects);
+  if (effects.length == 2) {
+    //both outputs
+    //α = 1.5128  [n0, n2, n5, n6, n7, n8] ◀━━ [n10, n11]
+    //2/3 of first node, 0 of second, all of third, half of last
+    network.nodes[0].causeLevel = 0.666;
+    network.nodes[1].causeLevel = 0;
+    network.nodes[2].causeLevel = 1;
+    network.nodes[3].causeLevel = 0.5;
+    alphaBox.html('α = 1.5128');
+
+  } else if (effects[0] == 'Output node 1') {
+    //first output causes only
+    //α = 1.4843  [n0, n1, n5, n6, n7, n8] ◀━━ [n11]
+    //2/3 of first node, 0 of second, all of third, half of last
+    network.nodes[0].causeLevel = 0.666;
+    network.nodes[1].causeLevel = 0;
+    network.nodes[2].causeLevel = 1;
+    network.nodes[3].causeLevel = 0.5;
+    alphaBox.html('α = 1.4843');
+
+  } else if (effects[0] == 'Output node 2') {
+    //second output causes only
+    //α = 1.1894  [n5, n6, n7, n8] ◀━━ [n10]
+    //none of first, none of second, all of third, half of last
+    network.nodes[0].causeLevel = 0;
+    network.nodes[1].causeLevel = 0;
+    network.nodes[2].causeLevel = 1;
+    network.nodes[3].causeLevel = 0.5;
+    alphaBox.html('α = 1.1894');
+  }  
+}
+
+function clearCauses() {
+  for (i=0;i<network.nodes.length;i++) {
+    network.nodes[i].causeLevel = 0;
+  }
+  alphaBox.html('');
 }
 
 function mousePressed() {
@@ -11,6 +47,7 @@ function mousePressed() {
   d2 = dist(mouseX, mouseY, 640, 220);
   fill(color(100, 50, 150));
   if (d1 < 16) {
+    clearCauses();
     network.nodes[12].selected = !network.nodes[12].selected;
     if (network.nodes[12].selected) {
       effects.push('Output node 2');
@@ -18,6 +55,7 @@ function mousePressed() {
       effects = effects.filter(w => w != 'Output node 2');
     }
   } else if (d2 < 16) {
+    clearCauses();
     network.nodes[11].selected = !network.nodes[11].selected;
     if (network.nodes[11].selected) {
       effects.unshift('Output node 1');
@@ -163,6 +201,7 @@ function Connection(from, to, w) {
     this.r = 32;
     this.func = func;
     this.selected = false;
+    this.causeLevel = 0;
     
     this.addInConnection = function(c) {
       this.in_connections.push(c);
@@ -213,6 +252,8 @@ function Connection(from, to, w) {
       fill(b);
       if (this.selected == true) {
         fill('red');
+      } else if (this.causeLevel != 0) {
+        fill(color(100*this.causeLevel, 200*this.causeLevel, 255));
       }
       ellipse(this.position.x, this.position.y, this.r, this.r);
       

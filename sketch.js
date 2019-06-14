@@ -37,7 +37,7 @@ function setup() {
   result = createElement('h2', '');
   result.position(20, 600);
 
-  causationTitle = createElement('h2', 'Actual Causation');
+  causationTitle = createElement('h2', 'Actual Causation (input 8573)');
   causationTitle.position(850, 65);
 
   causationBody = createElement('p', '');
@@ -47,6 +47,9 @@ function setup() {
   causationButton.position(850, 200);
   causationButton.mousePressed(findActualCause);
   causationButton.hide();
+
+  alphaBox = createElement('h4', '');
+  alphaBox.position(850, 240);
 
   textAlign(CENTER);
   textSize(50);
