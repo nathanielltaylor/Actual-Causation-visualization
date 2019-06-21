@@ -113,6 +113,13 @@ function setup() {
   for (i=0;i<allNodes.length;i++) {
       network.addNode(allNodes[i]);
   }
+
+  // for (var i; i < network.connections.length; i++) {
+  //   c = network.connections[i];
+  //   stroke(0);
+  //   strokeWeight(c.weight + .2);
+  //   line(c.a.position.x, c.a.position.y, c.b.position.x, c.b.position.y);
+  // }
 } 
 
 function draw() { 
