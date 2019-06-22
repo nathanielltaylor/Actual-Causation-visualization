@@ -84,7 +84,7 @@
     }
   }
   
-  function Node(x, y, func) { 
+  function Node(x, y, func, l) { 
     this.position = createVector(x, y);
     this.in_connections = [];
     this.out_connections = [];
@@ -95,6 +95,7 @@
     this.selected = false;
     this.causeLevel = 0;
     this.on = false;
+    this.layer = l;
     
     this.addInConnection = function(c) {
       this.in_connections.push(c);
@@ -151,8 +152,14 @@
       stroke(0);
       strokeWeight(1);
       //var b = map(this.sum,0,1,255,0);
-      if (this.selected == true) {
-        fill('red');
+      if (this.selected == true && this.layer == 1) {
+        fill('yellow');
+      } else if (this.selected == true && this.layer == 2) {
+        fill('orange');
+      } else if (this.selected == true && this.layer == 3) {
+        fill('red')
+      } else if (this.selected == true && this.layer == 4) {
+        fill(168, 6, 6);
       } else if (this.causeLevel != 0) {
         fill(color(255-255*this.causeLevel, 255-255*this.causeLevel, 255));
       } else if (this.on == true) {

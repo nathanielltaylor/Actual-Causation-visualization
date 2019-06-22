@@ -74,35 +74,35 @@ function setup() {
   //centerpoint is (640, 300)
   
   il = [
-    new Node(-600, -270, 'input'),
-    new Node(-600, -200, 'input'),
-    new Node(-600, -130, 'input'),
-    new Node(-600, -60, 'input'),
-    new Node(-600, 10, 'input'),
-    new Node(-600, 80, 'input'),
-    new Node(-600, 150, 'input'),
-    new Node(-600, 220, 'input'),
-    new Node(-600, 290, 'input'),
-    new Node(-600, 360, 'input')
+    new Node(-600, -270, 'input', 1),
+    new Node(-600, -200, 'input', 1),
+    new Node(-600, -130, 'input', 1),
+    new Node(-600, -60, 'input', 1),
+    new Node(-600, 10, 'input', 1),
+    new Node(-600, 80, 'input', 1),
+    new Node(-600, 150, 'input', 1),
+    new Node(-600, 220, 'input', 1),
+    new Node(-600, 290, 'input', 1),
+    new Node(-600, 360, 'input', 1)
   ]
   
   hl1 = [
-    new Node(-400, -144, 'tanh'),
-    new Node(-400, -18, 'tanh'),
-    new Node(-400, 108, 'tanh'),
-    new Node(-400, 234, 'tanh')
+    new Node(-400, -144, 'tanh', 2),
+    new Node(-400, -18, 'tanh', 2),
+    new Node(-400, 108, 'tanh', 2),
+    new Node(-400, 234, 'tanh', 2)
   ]
 
   hl2 = [
-      new Node(-200, -49.5, 'tanh'),
-      new Node(-200, 45, 'tanh'),
-      new Node(-200, 139.5, 'tanh')
+      new Node(-200, -49.5, 'tanh', 3),
+      new Node(-200, 45, 'tanh', 3),
+      new Node(-200, 139.5, 'tanh', 3)
   ]
 
   ol = [
     //slightly wider spaced than other layers
-    new Node(0, 0, 'sigmoid'),
-    new Node(0, 90, 'sigmoid')
+    new Node(0, 0, 'sigmoid', 4),
+    new Node(0, 90, 'sigmoid', 4)
   ]
   
   connectLayers(il, hl1, weights1);
