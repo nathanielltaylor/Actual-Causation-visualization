@@ -10,38 +10,48 @@ var causeNodesByLayer = {
 
 function causeAnchor1() {
   clean(false);
-  var alpha;
-  if (effects.length == 2) {
-    alpha = 0.1922
-    network.nodes[1].causeLevel = alpha;
-    network.nodes[7].causeLevel = alpha;
-    network.nodes[9].causeLevel = alpha;
-  } else if (effects[0] == 'Output Node 1') {
-    alpha = 0.4656;
-    network.nodes[8].causeLevel = alpha; //remember outputs are switched from TF model
-  } else if (effects[0] == 'Output Node 2') {
-    alpha = 0.1636;
-    network.nodes[9].causeLevel = alpha;
+  // var alpha;
+  // if (effects.length == 2) {
+  //   alpha = 0.1922
+  //   network.nodes[1].causeLevel = alpha;
+  //   network.nodes[7].causeLevel = alpha;
+  //   network.nodes[9].causeLevel = alpha;
+  // } else if (effects[0] == 'Output Node 1') {
+  //   alpha = 0.4656;
+  //   network.nodes[8].causeLevel = alpha; //remember outputs are switched from TF model
+  // } else if (effects[0] == 'Output Node 2') {
+  //   alpha = 0.1636;
+  //   network.nodes[9].causeLevel = alpha;
+  // }
+  // alphaBox.html('α = ' + str(alpha));
+  if (causalityLayers.length != 2) {
+    alert('Select at least 1 node from 2 different layers to compute causality.')
+  } else {
+    alphaBox.html('To be computed');
   }
-  alphaBox.html('α = ' + str(alpha));
 }
 
 function causeAnchor2() {
   clean(false);
-  var alpha;
-  if (effects.length == 2) {
-    alpha = 0.2839
-    network.nodes[3].causeLevel = alpha;
-    network.nodes[6].causeLevel = alpha;
-    network.nodes[7].causeLevel = alpha;
-  } else if (effects[0] == 'Output Node 1') {
-    alpha = 0.5456;
-    network.nodes[0].causeLevel = alpha; //remember outputs are switched from TF model
-  } else if (effects[0] == 'Output Node 2') {
-    alpha = 0.8022;
-    network.nodes[9].causeLevel = alpha;
+  // var alpha;
+  // if (effects.length == 2) {
+  //   alpha = 0.2839
+  //   network.nodes[3].causeLevel = alpha;
+  //   network.nodes[6].causeLevel = alpha;
+  //   network.nodes[7].causeLevel = alpha;
+  // } else if (effects[0] == 'Output Node 1') {
+  //   alpha = 0.5456;
+  //   network.nodes[0].causeLevel = alpha; //remember outputs are switched from TF model
+  // } else if (effects[0] == 'Output Node 2') {
+  //   alpha = 0.8022;
+  //   network.nodes[9].causeLevel = alpha;
+  // }
+  // alphaBox.html('α = ' + str(alpha));
+  if (causalityLayers.length != 2) {
+    alert('Select at least 1 node from 2 different layers to compute causality.')
+  } else {
+    alphaBox.html('To be computed');
   }
-  alphaBox.html('α = ' + str(alpha));
 }
 
 function clearCauses(clearSelectedOutputs) {
