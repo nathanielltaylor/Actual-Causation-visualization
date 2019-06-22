@@ -20,10 +20,16 @@
 
 function nodeSelected(node) {
     clean(false);
-    network.nodes[node].selected = !network.nodes[node].selected;
-    if (network.nodes[node].selected) {
+    var nodeObject = network.nodes[node];
+    nodeObject.selected = !nodeObject.selected;
+    if (nodeObject.selected) {
       effects.push(str(node));
     } else {
       effects = effects.filter(w => w != str(node));
     }
+    if (nodeObject.selected == true) {
+      causeNodesByLayer[nodeObject.layer].push(node); 
+    } else {
+      causeNodesByLayer[nodeObject.layer] = causeNodesByLayer[nodeObject.layer].filter(w => w != node);
+    }    
 }

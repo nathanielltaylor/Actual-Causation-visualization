@@ -1,6 +1,12 @@
 var finalOutputs = [];
 var effects = [];
 var causalityLayers = [];
+var causeNodesByLayer = {
+  1: [],
+  2: [],
+  3: [],
+  4: []
+}
 
 function causeAnchor1() {
   clean(false);
@@ -133,10 +139,16 @@ function mousePressed() {
     node = 18;
     selectLayer(4, node);
   }
-  if (causalityLayers.includes(network.nodes[node].layer)) {
+
+  var nodeObject = network.nodes[node];
+  if (causalityLayers.includes(nodeObject.layer)) {
     nodeSelected(node);
+    if (nodeObject.selected == false) {
+      if (causeNodesByLayer[nodeObject.layer].length == 0) {
+        causalityLayers = causalityLayers.filter(w => w != nodeObject.layer);
+      }
+    }
   }
-  //NEED TO CLEAR causalityLayers as nodes get de-selected
 
   var nodeStrings = 'None';
   if (effects.length > 0) {
@@ -151,11 +163,12 @@ function mousePressed() {
 }
 
 function selectLayer(layer, node) {
+  var nodeObject = network.nodes[node];
   if (causalityLayers.length < 2) {
     if (!causalityLayers.includes(layer)) {
       causalityLayers.push(layer);
     }
-  } else if (!causalityLayers.includes(network.nodes[node].layer)) {
+  } else if (!causalityLayers.includes(nodeObject.layer)) {
     alert('Cannot select nodes from more than 2 layers simultaneously.');
   }
 }
