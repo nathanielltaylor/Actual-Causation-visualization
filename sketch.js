@@ -70,6 +70,11 @@ function setup() {
   textAlign(CENTER);
   textSize(50);
 
+  creditBox = createElement('p', 'Visualization by Nathaniel Taylor.');
+  creditBox.position(20, 675);
+  creditBox2 = createElement('div', 'Signal pulse animation is adapted from open source code released by Simon Tiger.');
+  creditBox2.position(20, 715);
+
   network = new Network(width/2, height/2-100);
   //centerpoint is (640, 300)
   
@@ -113,13 +118,6 @@ function setup() {
   for (i=0;i<allNodes.length;i++) {
       network.addNode(allNodes[i]);
   }
-
-  // for (var i; i < network.connections.length; i++) {
-  //   c = network.connections[i];
-  //   stroke(0);
-  //   strokeWeight(c.weight + .2);
-  //   line(c.a.position.x, c.a.position.y, c.b.position.x, c.b.position.y);
-  // }
 } 
 
 function draw() { 
