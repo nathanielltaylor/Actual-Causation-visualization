@@ -51,21 +51,25 @@ function setup() {
   causationTitle = createElement('h2', 'Actual Causation');
   causationTitle.position(950, 30);
 
-  causationBody = createElement('p', '');
-  causationBody.position(950, 100);
+  causationBody = createElement('p', 'Causation calculations are based on an input of 1,0,1,0,1,1,0,1,1,0');
+  causationBody.position(950, 80);
 
-  causationButton = createButton('Find Causes with 1,0,1,0,1,1,0,1,1,0');
-  causationButton.position(950, 150);
-  causationButton.mousePressed(causeAnchor1);
+  causationBody = createElement('p', '');
+  causationBody.position(950, 140);
+
+  causationButton = createButton('Compute Causal Link');
+  causationButton.id('cause_button');
+  causationButton.position(1020, 210);
+  causationButton.mousePressed(causeAnchor);
   causationButton.hide();
 
-  causationButton2 = createButton('Find Causes with 1,0,1,0,1,1,0,0,0,1');
-  causationButton2.position(1150, 150);
-  causationButton2.mousePressed(causeAnchor2);
-  causationButton2.hide();
+  // causationButton2 = createButton('Find Causes with 1,0,1,0,1,1,0,0,0,1');
+  // causationButton2.position(1150, 150);
+  // causationButton2.mousePressed(causeAnchor2);
+  // causationButton2.hide();
 
-  alphaBox = createElement('h4', '');
-  alphaBox.position(950, 170);
+  alphaBox = createElement('h3', '');
+  alphaBox.position(950, 270);
 
   textAlign(CENTER);
   textSize(50);

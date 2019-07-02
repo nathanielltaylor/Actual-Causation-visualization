@@ -8,8 +8,22 @@ var causeNodesByLayer = {
   4: []
 }
 
-function causeAnchor1() {
+function causeAnchor() {
   clean(false);
+  alphaBox.html('');
+  if (causalityLayers.length != 2) {
+    alert('Select at least 1 node from 2 different layers to compute causality.')
+  }
+  var alpha, sortedLayers, layersKey, inNodes, outNodes;
+  sortedLayers = causalityLayers.sort();
+  layersKey = int(sortedLayers.join(''));
+  inNodes = causeNodesByLayer[sortedLayers[0]].sort().join(', ');
+  outNodes = causeNodesByLayer[sortedLayers[1]].sort().join(', ');
+  alpha = alphas[layersKey][outNodes][inNodes];
+  alphaBox.html('α = ' + str(alpha));
+}
+// function causeAnchor1() {
+//   clean(false);
   // var alpha;
   // if (effects.length == 2) {
   //   alpha = 0.1922
@@ -24,15 +38,15 @@ function causeAnchor1() {
   //   network.nodes[9].causeLevel = alpha;
   // }
   // alphaBox.html('α = ' + str(alpha));
-  if (causalityLayers.length != 2) {
-    alert('Select at least 1 node from 2 different layers to compute causality.')
-  } else {
-    alphaBox.html('To be computed');
-  }
-}
+//   if (causalityLayers.length != 2) {
+//     alert('Select at least 1 node from 2 different layers to compute causality.')
+//   } else {
+//     alphaBox.html('To be computed');
+//   }
+// }
 
-function causeAnchor2() {
-  clean(false);
+// function causeAnchor2() {
+//   clean(false);
   // var alpha;
   // if (effects.length == 2) {
   //   alpha = 0.2839
@@ -47,12 +61,12 @@ function causeAnchor2() {
   //   network.nodes[9].causeLevel = alpha;
   // }
   // alphaBox.html('α = ' + str(alpha));
-  if (causalityLayers.length != 2) {
-    alert('Select at least 1 node from 2 different layers to compute causality.')
-  } else {
-    alphaBox.html('To be computed');
-  }
-}
+//   if (causalityLayers.length != 2) {
+//     alert('Select at least 1 node from 2 different layers to compute causality.')
+//   } else {
+//     alphaBox.html('To be computed');
+//   }
+// }
 
 function clearCauses(clearSelectedOutputs) {
   for (i=0;i<network.nodes.length;i++) {
@@ -161,13 +175,14 @@ function mousePressed() {
   }
 
   var nodeStrings = 'None';
+  console.log(causalityLayers);
   if (effects.length > 0) {
     nodeStrings = effects.join(', ');
-    causationButton.show();
-    causationButton2.show();
+    if (causalityLayers.length == 2) {
+      causationButton.show();
+    }
   } else {
     causationButton.hide();
-    causationButton2.hide();
   }
   causationBody.html('Selected nodes: ' + nodeStrings);
 }
