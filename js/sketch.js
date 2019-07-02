@@ -63,11 +63,6 @@ function setup() {
   causationButton.mousePressed(causeAnchor);
   causationButton.hide();
 
-  // causationButton2 = createButton('Find Causes with 1,0,1,0,1,1,0,0,0,1');
-  // causationButton2.position(1150, 150);
-  // causationButton2.mousePressed(causeAnchor2);
-  // causationButton2.hide();
-
   alphaBox = createElement('h3', '');
   alphaBox.position(950, 270);
 
