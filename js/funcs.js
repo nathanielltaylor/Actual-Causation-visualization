@@ -23,11 +23,8 @@ function setVirginicaActivations() {
   network.nodes[5].on = true;
   network.nodes[7].on = true;
   network.nodes[8].on = true;
-  network.nodes[11].on = true;
+  network.nodes[10].on = true;
   network.nodes[12].on = true;
-  network.nodes[14].on = true;
-  network.nodes[15].on = true;
-  network.nodes[16].on = true;
   network.nodes[18].on = true;
   result.html('Classification: 01, Iris virginica');
 }
