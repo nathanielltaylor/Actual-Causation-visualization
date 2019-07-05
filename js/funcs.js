@@ -128,6 +128,7 @@ function mousePressed() {
       }
     }
   }
+  causalityLayers.sort();
 
   var nodeStrings = 'None';
   console.log(causalityLayers);

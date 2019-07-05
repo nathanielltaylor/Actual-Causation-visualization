@@ -152,14 +152,18 @@
       stroke(0);
       strokeWeight(1);
       //var b = map(this.sum,0,1,255,0);
-      if (this.selected == true && this.layer == 1) {
-        fill('yellow');
-      } else if (this.selected == true && this.layer == 2) {
-        fill('orange');
-      } else if (this.selected == true && this.layer == 3) {
-        fill('red')
-      } else if (this.selected == true && this.layer == 4) {
-        fill(168, 6, 6);
+      // if (this.selected == true && this.layer == 1) {
+      //   fill('yellow');
+      // } else if (this.selected == true && this.layer == 2) {
+      //   fill('orange');
+      // } else if (this.selected == true && this.layer == 3) {
+      //   fill('red')
+      // } else if (this.selected == true && this.layer == 4) {
+      //   fill(168, 6, 6);
+      if (this.selected == true && this.layer == causalityLayers[0]) {
+        fill('blue');
+      } else if (this.selected == true && this.layer == causalityLayers[1]) {
+        fill('green');
       } else if (this.causeLevel != 0) {
         fill(color(255-255*this.causeLevel, 255-255*this.causeLevel, 255));
       } else if (this.on == true) {
