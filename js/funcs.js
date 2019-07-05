@@ -8,6 +8,23 @@ var causeNodesByLayer = {
   4: []
 }
 
+function setVirginicaActivations() {
+  turnAllOff();
+  network.nodes[0].on = true;
+  network.nodes[2].on = true;
+  network.nodes[4].on = true;
+  network.nodes[5].on = true;
+  network.nodes[7].on = true;
+  network.nodes[8].on = true;
+  network.nodes[11].on = true;
+  network.nodes[12].on = true;
+  network.nodes[14].on = true;
+  network.nodes[15].on = true;
+  network.nodes[16].on = true;
+  network.nodes[18].on = true;
+  result.html('Classification: 01, Iris virginica');
+}
+
 function causeAnchor() {
   clean(false);
   alphaBox.html('');
@@ -21,6 +38,7 @@ function causeAnchor() {
   outNodes = causeNodesByLayer[sortedLayers[1]].sort().join(', ');
   alpha = alphas[layersKey][outNodes][inNodes];
   alphaBox.html('α = ' + str(alpha));
+  setVirginicaActivations();
 }
 
 function clearCauses(clearSelectedOutputs) {
@@ -159,6 +177,8 @@ function selectLayer(layer, node) {
 function run() {
   clean();
   result.html('');
+  info.html('');
+  resetButton.show();
   finalOutputs = [];
   const vector = input.value();
   title.html('Input: ' + vector);
@@ -216,6 +236,7 @@ function clean(clearSelectedOutputs = true) {
 
 function nodeSelected(node) {
   clean(false);
+  setVirginicaActivations();
   var nodeObject = network.nodes[node];
   nodeObject.selected = !nodeObject.selected;
   if (nodeObject.selected) {

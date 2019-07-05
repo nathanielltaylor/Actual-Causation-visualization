@@ -161,12 +161,18 @@
       // } else if (this.selected == true && this.layer == 4) {
       //   fill(168, 6, 6);
       if (this.selected == true && this.layer == causalityLayers[0]) {
-        fill('blue');
+        // fill('blue');
+        stroke('blue');
+        strokeWeight(5);
       } else if (this.selected == true && this.layer == causalityLayers[1]) {
-        fill('green');
-      } else if (this.causeLevel != 0) {
-        fill(color(255-255*this.causeLevel, 255-255*this.causeLevel, 255));
-      } else if (this.on == true) {
+        // fill('green');
+        stroke('green');
+        strokeWeight(5);
+      }
+      //  else if (this.causeLevel != 0) {
+      //   fill(color(255-255*this.causeLevel, 255-255*this.causeLevel, 255));
+      // }
+      if (this.on == true) {
         fill('black');
       } else {
         fill('white');

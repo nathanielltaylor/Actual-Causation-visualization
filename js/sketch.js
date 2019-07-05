@@ -32,21 +32,29 @@ function setup() {
   background('#eee');
 
   input = createInput();
-  input.position(400, 115);
+  input.position(400, 135);
 
   button = createButton('Submit');
   button.id('submit_button')
-  button.position(input.x + input.width, 115);
+  button.position(input.x + input.width, 135);
   button.mousePressed(run);
 
   title = createElement('h4', 'Enter 10 comma-separated binary digits');
   title.position(400, 60);
 
+  info = createElement('p', 'Default activations based on on an input of 1,0,1,0,1,1,0,1,1,0');
+  info.position(400, 90);
+
+  resetButton = createButton('Reset to Defaults');
+  resetButton.position(400, 110);
+  resetButton.hide();
+  resetButton.mousePressed(setVirginicaActivations);
+
   classTitle = createElement('h2', 'Sample classification');
   classTitle.position(400, 30);
 
   result = createElement('h4', '');
-  result.position(400, 120);
+  result.position(400, 145);
 
   causationTitle = createElement('h2', 'Actual Causation');
   causationTitle.position(950, 30);
@@ -117,6 +125,7 @@ function setup() {
   for (i=0;i<allNodes.length;i++) {
       network.addNode(allNodes[i]);
   }
+  setVirginicaActivations();
 } 
 
 function draw() { 
