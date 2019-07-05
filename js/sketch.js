@@ -66,10 +66,20 @@ function setup() {
   causationBody.position(950, 140);
 
   causationButton = createButton('Compute Causal Link');
-  causationButton.id('cause_button');
-  causationButton.position(1020, 210);
+  causationButton.class('cause_button');
+  causationButton.position(1000, 210);
   causationButton.mousePressed(causeAnchor);
   causationButton.hide();
+
+  layerCausationButton = createButton('Compute Full Causal Account');
+  layerCausationButton.class('cause_button');
+  layerCausationButton.id('layers');
+  layerCausationButton.position(1150, 210);
+  layerCausationButton.mousePressed(layerCauseAnchor);
+  layerCausationButton.hide();
+
+  // accountBox = createElement('div', '');
+  // accountBox.position(950, 310);
 
   alphaBox = createElement('h3', '');
   alphaBox.position(950, 270);

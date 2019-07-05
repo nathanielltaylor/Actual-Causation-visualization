@@ -14,10 +14,14 @@ html, body {
     margin-left: 15px;
     border-radius: 25px; 
   }
-  #cause_button {
+  .cause_button {
     height: 50px;
     width: 100px;
     font-size: 14px;
+  }
+  #layers {
+    height: 50px;
+    width: 170px;
   }
   canvas {
     display: block;

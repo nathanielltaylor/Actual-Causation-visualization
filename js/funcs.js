@@ -6,7 +6,14 @@ var causeNodesByLayer = {
   2: [],
   3: [],
   4: []
-}
+};
+var layersFull = {
+  1: false,
+  2: false,
+  3: false,
+  4: false
+};
+var causePars = [];
 
 function setVirginicaActivations() {
   turnAllOff();
@@ -23,6 +30,17 @@ function setVirginicaActivations() {
   network.nodes[16].on = true;
   network.nodes[18].on = true;
   result.html('Classification: 01, Iris virginica');
+}
+
+function layerCauseAnchor() {
+  sortedLayers = causalityLayers.sort();
+  layersKey = int(sortedLayers.join(''));
+  var ac = actual[layersKey].split('\n');
+  for (var i=0; i < ac.length; i++) {
+    var x = createElement('p', ac[i]);
+    x.position(950, 280+i*10);
+    causePars[i] = x;
+  }
 }
 
 function causeAnchor() {
@@ -161,6 +179,14 @@ function mousePressed() {
     causationButton.hide();
   }
   causationBody.html('Selected nodes: ' + nodeStrings);
+  if (twoLayersFull()) {
+    layerCausationButton.show();
+  } else {
+    layerCausationButton.hide();
+    for (var i=0; i < causePars.length; i++) {
+      causePars[i].html('')
+    }
+  }
 }
 
 function selectLayer(layer, node) {
@@ -248,5 +274,44 @@ function nodeSelected(node) {
     causeNodesByLayer[nodeObject.layer].push(node); 
   } else {
     causeNodesByLayer[nodeObject.layer] = causeNodesByLayer[nodeObject.layer].filter(w => w != node);
+  }
+  if (nodeObject.layer == 1) {
+    if (causeNodesByLayer[1].length == 10) {
+      layersFull[1] = true;
+    } else {
+      layersFull[1] = false;
+    }
+  } else if (nodeObject.layer == 2) {
+    if (causeNodesByLayer[2].length == 4) {
+      layersFull[2] = true;
+    } else {
+      layersFull[2] = false;
+    }
+  } else if (nodeObject.layer == 3) {
+    if (causeNodesByLayer[3].length == 3) {
+      layersFull[3] = true;
+    } else {
+      layersFull[3] = false;
+    }
+  } else if (nodeObject.layer == 4) {
+    if (causeNodesByLayer[4].length == 2) {
+      layersFull[4] = true;
+    } else {
+      layersFull[4] = false;
+    }
   }    
+}
+
+function twoLayersFull() {
+  var x = 0;
+  for (var i=1; i<5; i++) {
+    if (layersFull[i]) {
+      x++;
+    }
+  }
+  if (x == 2) {
+    return true;
+  } else {
+    return false;
+  }
 }
