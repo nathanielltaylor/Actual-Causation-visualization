@@ -38,6 +38,7 @@ function layerCauseAnchor() {
     x.position(950, 280+i*10);
     causePars[i] = x;
   }
+  alphaBox.html('');
 }
 
 function causeAnchor() {
@@ -62,6 +63,9 @@ function clearCauses(clearSelectedOutputs) {
     if (clearSelectedOutputs == true) {
       network.nodes[i].selected = false;
     }
+  }
+  if (clearSelectedOutputs) {
+    causalityLayers = [];
   }
   alphaBox.html('');
 }
@@ -202,6 +206,9 @@ function run() {
   result.html('');
   info.html('');
   resetButton.show();
+  causationButton.hide();
+  layerCausationButton.hide();
+  causationBody.html('Selected nodes: None');
   finalOutputs = [];
   const vector = input.value();
   title.html('Input: ' + vector);
