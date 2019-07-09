@@ -124,6 +124,30 @@ function setup() {
   layer4Button.mousePressed(selectLayer4);
   layer4Button.class('layer_button');
 
+  dlayer1Button = createButton('Clear Layer 1');
+  dlayer1Button.position(950, 700);
+  dlayer1Button.mousePressed(deselectLayer1);
+  dlayer1Button.class('dlayer_button');
+  dlayer1Button.hide();
+
+  dlayer2Button = createButton('Clear Layer 2');
+  dlayer2Button.position(1050, 700);
+  dlayer2Button.mousePressed(deselectLayer2);
+  dlayer2Button.class('dlayer_button');
+  dlayer2Button.hide();
+
+  dlayer3Button = createButton('Clear Layer 3');
+  dlayer3Button.position(1150, 700);
+  dlayer3Button.mousePressed(deselectLayer3);
+  dlayer3Button.class('dlayer_button');
+  dlayer3Button.hide();
+
+  dlayer4Button = createButton('Clear Layer 4');
+  dlayer4Button.position(1250, 700);
+  dlayer4Button.mousePressed(deselectLayer4);
+  dlayer4Button.class('dlayer_button');
+  dlayer4Button.hide();
+
   textAlign(CENTER);
   textSize(50);
 
