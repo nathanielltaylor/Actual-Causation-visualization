@@ -43,6 +43,9 @@ function layerCauseAnchor() {
 
 function causeAnchor() {
   clean(false);
+  for (var i=0; i < causePars.length; i++) {
+    causePars[i].html('')
+  }
   alphaBox.html('');
   if (causalityLayers.length != 2) {
     alert('Select at least 1 node from 2 different layers to compute causality.')
@@ -185,7 +188,7 @@ function mousePressed() {
   } else {
     layerCausationButton.hide();
     for (var i=0; i < causePars.length; i++) {
-      causePars[i].html('')
+      causePars[i].html('');
     }
   }
 }
@@ -346,4 +349,69 @@ function labelNodes() {
 
   text('n17', 640, 305);
   text('n18', 640, 395);
+}
+
+function twoLayersSelected(l) {
+  if (causalityLayers.length == 2 && !causalityLayers.includes(l)) {
+    alert('Cannot select nodes from more than 2 layers simultaneously.');
+    return true;
+  }
+}
+
+function selectWholeLayer(l, start, end) {
+  if (!twoLayersSelected(l)) {
+    for (var i = start; i < end; i++) {
+      network.nodes[i].selected = true;
+      if (!causeNodesByLayer[l].includes(i)) {
+        causeNodesByLayer[l].push(i);
+      }
+      if (!effects.includes(str(i))) {
+        effects.push(str(i));
+      }
+    }
+    if (!causalityLayers.includes(l)) {
+      causalityLayers.push(l);
+    }
+    layersFull[l] = true;
+    printSelectedNodes();
+  }
+}
+
+function selectLayer1() {
+  selectWholeLayer(1, 0, 10);
+}
+
+function selectLayer2() {
+  selectWholeLayer(2, 10, 14);
+}
+
+function selectLayer3() {
+  selectWholeLayer(3, 14, 17);
+}
+
+function selectLayer4() {
+  selectWholeLayer(4, 17, 19);
+}
+
+function printSelectedNodes() {
+  var nodeStrings = 'None';
+  if (effects.length > 0) {
+    nodeStrings = effects.join(', ');
+    if (causalityLayers.length == 2) {
+      causationButton.show();
+    } else {
+      causationButton.hide();
+    }
+  } else {
+    causationButton.hide();
+  }
+  causationBody.html('Selected nodes: ' + nodeStrings);
+  if (twoLayersFull()) {
+    layerCausationButton.show();
+  } else {
+    layerCausationButton.hide();
+    for (var i=0; i < causePars.length; i++) {
+      causePars[i].html('')
+    }
+  }
 }

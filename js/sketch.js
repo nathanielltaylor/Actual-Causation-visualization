@@ -104,6 +104,26 @@ function setup() {
   alphaBox = createElement('h3', '');
   alphaBox.position(950, 340);
 
+  layer1Button = createButton('Select Layer 1');
+  layer1Button.position(950, 700);
+  layer1Button.mousePressed(selectLayer1);
+  layer1Button.class('layer_button');
+
+  layer2Button = createButton('Select Layer 2');
+  layer2Button.position(1050, 700);
+  layer2Button.mousePressed(selectLayer2);
+  layer2Button.class('layer_button');
+
+  layer3Button = createButton('Select Layer 3');
+  layer3Button.position(1150, 700);
+  layer3Button.mousePressed(selectLayer3);
+  layer3Button.class('layer_button');
+
+  layer4Button = createButton('Select Layer 4');
+  layer4Button.position(1250, 700);
+  layer4Button.mousePressed(selectLayer4);
+  layer4Button.class('layer_button');
+
   textAlign(CENTER);
   textSize(50);
 
