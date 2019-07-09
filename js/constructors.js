@@ -84,18 +84,19 @@
     }
   }
   
-  function Node(x, y, func, l) { 
+  function Node(x, y, func, l, r, default_r = 32) { 
     this.position = createVector(x, y);
     this.in_connections = [];
     this.out_connections = [];
     this.inputs_received = 0;
     this.sum = 0;
-    this.r = 32;
+    this.r = r;
     this.func = func;
     this.selected = false;
     this.causeLevel = 0;
     this.on = false;
     this.layer = l;
+    this.default_r = default_r;
     
     this.addInConnection = function(c) {
       this.in_connections.push(c);
@@ -179,7 +180,7 @@
       }
       ellipse(this.position.x, this.position.y, this.r, this.r);
       
-      this.r = lerp(this.r,32,0.1);
+      this.r = lerp(this.r,this.default_r,0.1);
     }
   }
 

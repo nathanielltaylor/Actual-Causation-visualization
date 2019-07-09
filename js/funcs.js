@@ -407,6 +407,7 @@ function deselectWholeLayer(l, start, end, sb, cb) {
   printSelectedNodes();
   sb.show();
   cb.hide();
+  alphaBox.html('');
 }
 
 function deselectLayer1() {
