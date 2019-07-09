@@ -35,7 +35,7 @@ function layerCauseAnchor() {
   var ac = actual[layersKey].split('\n');
   for (var i=0; i < ac.length; i++) {
     var x = createElement('p', ac[i]);
-    x.position(950, 280+i*10);
+    x.position(950, 340+i*10);
     causePars[i] = x;
   }
   alphaBox.html('');
@@ -318,4 +318,32 @@ function twoLayersFull() {
   } else {
     return false;
   }
+}
+
+function labelNodes() {
+  fill('#2aa198');
+  textSize(15);
+  //5 down from the center of each circle so text is centered on node
+  text('n0', 40, 35);
+  text('n1', 40, 105);
+  text('n2', 40, 175);
+  text('n3', 40, 245);
+  text('n4', 40, 315);
+  text('n5', 40, 385);
+  text('n6', 40, 455);
+  text('n7', 40, 525);
+  text('n8', 40, 595);
+  text('n9', 40, 665);
+
+  text('n10', 240, 161);
+  text('n11', 240, 287);
+  text('n12', 240, 413);
+  text('n13', 240, 539);
+
+  text('n14', 440, 255.5);
+  text('n15', 440, 350);
+  text('n16', 440, 444.5);
+
+  text('n17', 640, 305);
+  text('n18', 640, 395);
 }

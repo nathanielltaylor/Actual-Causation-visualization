@@ -76,22 +76,25 @@ function setup() {
   causationTitle = createElement('h2', 'Actual Causation');
   causationTitle.position(950, 30);
 
+  causationDescription = createElement('p', 'To display the strength of a specific causal link select two sets of node from two different layers in the graph. For all actual causes select full two layers.');
+  causationDescription.position(950, 80)
+
   causationBody = createElement('p', 'Causation calculations are based on an input of 1,0,1,0,1,1,0,1,1,0');
-  causationBody.position(950, 80);
+  causationBody.position(950, 150);
 
   causationBody = createElement('p', '');
-  causationBody.position(950, 140);
+  causationBody.position(950, 210);
 
   causationButton = createButton('Compute Causal Link');
   causationButton.class('cause_button');
-  causationButton.position(1000, 210);
+  causationButton.position(1000, 280);
   causationButton.mousePressed(causeAnchor);
   causationButton.hide();
 
   layerCausationButton = createButton('Compute Full Causal Account');
   layerCausationButton.class('cause_button');
   layerCausationButton.id('layers');
-  layerCausationButton.position(1150, 210);
+  layerCausationButton.position(1150, 280);
   layerCausationButton.mousePressed(layerCauseAnchor);
   layerCausationButton.hide();
 
@@ -99,7 +102,7 @@ function setup() {
   // accountBox.position(950, 310);
 
   alphaBox = createElement('h3', '');
-  alphaBox.position(950, 270);
+  alphaBox.position(950, 340);
 
   textAlign(CENTER);
   textSize(50);
@@ -159,4 +162,5 @@ function draw() {
   background('#eee');
   network.update();
   network.display();
+  labelNodes();
 }
