@@ -162,24 +162,24 @@
       // } else if (this.selected == true && this.layer == 4) {
       //   fill(168, 6, 6);
       if (this.selected == true && this.layer == causalityLayers[0]) {
-        // fill('blue');
         stroke('blue');
         strokeWeight(5);
       } else if (this.selected == true && this.layer == causalityLayers[1]) {
-        // fill('green');
         stroke('green');
         strokeWeight(5);
       }
-      //  else if (this.causeLevel != 0) {
-      //   fill(color(255-255*this.causeLevel, 255-255*this.causeLevel, 255));
-      // }
       if (this.on == true) {
         fill('black');
       } else {
         fill('white');
       }
+      if (this.causeLevel != 0) {
+        // //blue color scheme
+        // fill(color(255-255*this.causeLevel, 255-255*this.causeLevel, 255));
+        //red color scheme -> 0.7 coefficient captures diversity across range of values over 1
+        fill(color(255, 255-255*this.causeLevel*.7, 255-255*this.causeLevel*.7));
+      }
       ellipse(this.position.x, this.position.y, this.r, this.r);
-      
       this.r = lerp(this.r,this.default_r,0.1);
     }
   }

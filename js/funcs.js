@@ -30,6 +30,9 @@ function setVirginicaActivations() {
 }
 
 function layerCauseAnchor() {
+  for (var i=0; i < causePars.length; i++) {
+    causePars[i].html('')
+  };
   sortedLayers = causalityLayers.sort();
   layersKey = int(sortedLayers.join(''));
   var ac = actual[layersKey].split('\n');
@@ -171,7 +174,6 @@ function mousePressed() {
   causalityLayers.sort();
 
   var nodeStrings = 'None';
-  console.log(causalityLayers);
   if (effects.length > 0) {
     nodeStrings = effects.join(', ');
     if (causalityLayers.length == 2) {
@@ -231,16 +233,17 @@ function run() {
   network.feedforward(...v);
 }
 
-function connectLayers(layer1, layer2, weights) {
+function connectLayers(nw, layer1, layer2, weights) {
     for (i=0;i<layer1.length;i++) {
         for (j=0;j<layer2.length;j++) {
-         network.connect(layer1[i], layer2[j], weights[i][j]);
+         nw.connect(layer1[i], layer2[j], weights[i][j]);
         }
     }
 }
 
 function printLabels() {
   var cl, clString;
+  console.log(finalOutputs);
   cl = str(Math.round(finalOutputs[0])) + str(Math.round(finalOutputs[1]));
   if (cl == '00') {
     clString = 'Iris setosa';

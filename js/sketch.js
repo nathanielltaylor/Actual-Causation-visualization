@@ -59,7 +59,7 @@ function setup() {
   title = createElement('h4', 'Enter 10 comma-separated binary digits');
   title.position(400, 60);
 
-  info = createElement('p', 'Default activations based on on an input of 1,0,1,0,1,1,0,1,1,0');
+  info = createElement('p', 'Default activations based on an input of 1,0,1,0,1,1,0,1,1,0');
   info.position(400, 90);
 
   resetButton = createButton('Reset to Defaults');
@@ -153,8 +153,9 @@ function setup() {
 
   creditBox = createElement('p', 'Visualization by Nathaniel Taylor.');
   creditBox.position(20, 675);
-  creditBox2 = createElement('div', 'Signal pulse animation is adapted from open source code released by Simon Tiger.');
-  creditBox2.position(20, 715);
+  //decide where to move this to make room for heatmap
+  // creditBox2 = createElement('div', 'Signal pulse animation is adapted from open source code released by Simon Tiger.');
+  // creditBox2.position(20, 715);
 
   network = new Network(width/2, height/2-100);
   r = 32;
@@ -192,29 +193,91 @@ function setup() {
     new Node(0, 90, 'sigmoid', 4, r)
   ]
   
-  connectLayers(il, hl1, weights1);
-  connectLayers(hl1, hl2, weights2);
-  connectLayers(hl2, ol, weights3);
+  connectLayers(network, il, hl1, weights1);
+  connectLayers(network, hl1, hl2, weights2);
+  connectLayers(network, hl2, ol, weights3);
 
   allNodes = il.concat(hl1, hl2, ol);
   for (i=0;i<allNodes.length;i++) {
       network.addNode(allNodes[i]);
   }
   setVirginicaActivations();
-
-  // heatmap = new Network(width*.5, height*.7);
-  // var t = new Node(0, 0, 'input', 5, 10, 10);
-  // var s = new Node(100, 100, 'input', 5, 10, 10);
-  // heatmap.connect(t, s, 1);
-  // heatmap.addNode(t);
-  // heatmap.addNode(s);
+  drawHeatMap();
 } 
 
 function draw() { 
   background('#eee');
   network.update();
   network.display();
-  // heatmap.update();
-  // heatmap.display();
+  heatmap.update();
+  heatmap.display();
   labelNodes();
+}
+
+function drawHeatMap() {
+  heatmap = new Network(width*.5, height*.7);
+  var cornW = -30;
+  var cornH = -90;
+  var heatR = 15;
+  heatIL = [
+    new Node(cornW, cornH, 'input', 101, heatR, heatR),
+    new Node(cornW, cornH+25, 'input', 101, heatR, heatR),
+    new Node(cornW, cornH+50, 'input', 101, heatR, heatR),
+    new Node(cornW, cornH+75, 'input', 101, heatR, heatR),
+    new Node(cornW, cornH+100, 'input', 101, heatR, heatR),
+    new Node(cornW, cornH+125, 'input', 101, heatR, heatR),
+    new Node(cornW, cornH+150, 'input', 101, heatR, heatR),
+    new Node(cornW, cornH+175, 'input', 101, heatR, heatR),
+    new Node(cornW, cornH+200, 'input', 101, heatR, heatR),
+    new Node(cornW, cornH+225, 'input', 101, heatR, heatR)
+  ];
+  heatL1 = [
+    new Node(cornW+60, cornH+45, 'tanh', 102, heatR, heatR),
+    new Node(cornW+60, cornH+90, 'tanh', 102, heatR, heatR),
+    new Node(cornW+60, cornH+135, 'tanh', 102, heatR, heatR),
+    new Node(cornW+60, cornH+180, 'tanh', 102, heatR, heatR)
+  ];
+  heatL2 = [
+    new Node(cornW+120, cornH+45+33.75, 'tanh', 103, heatR, heatR),
+    new Node(cornW+120, cornH+45+67.5, 'tanh', 103, heatR, heatR),
+    new Node(cornW+120, cornH+45+101.25, 'tanh', 103, heatR, heatR)
+  ];
+  heatOL = [
+    new Node(cornW+180, cornH+45+33.75+22.5, 'sigmoid', 104, heatR, heatR),
+    new Node(cornW+180, cornH+45+33.75+45, 'sigmoid', 104, heatR, heatR)
+  ];
+  colorLayer(heatIL, 12, 0);
+  colorLayer(heatL1, 23, 10);
+  colorLayer(heatL2, 34, 14);
+  connectLayers(heatmap, heatIL, heatL1, weights1);
+  connectLayers(heatmap, heatL1, heatL2, weights2);
+  connectLayers(heatmap, heatL2, heatOL, weights3);
+  heatNodes = heatIL.concat(heatL1, heatL2, heatOL);
+  for (i=0;i<heatNodes.length;i++) {
+    heatmap.addNode(heatNodes[i]);
+  }
+}
+
+function colorLayer(layer, idx, offset) {
+  var trans = actual[idx].split('\n').filter(x => x != "    ");
+  for (var i=0; i<trans.length; i++) {
+    var r = parseCausationLine(trans[i]);
+    for (var j=0; j<layer.length; j++) {
+      if (idx != 12) {
+        console.log(r['nodes']);
+      }
+      if (r['nodes'].includes(j+offset)) {
+        layer[j].causeLevel += r['alpha'];
+      }
+    }
+  }
+}
+
+function parseCausationLine(line) {
+  var alpha = float(line.split('[')[0].split('=')[1]);
+  var causeNodes = line.split('[')[1].split(']')[0].split(',').map(x => int(x.replace(/\s+/, "").substring(1)));
+  return {
+    'alpha': alpha / causeNodes.length,
+    'nodes': causeNodes
+  }
 }
