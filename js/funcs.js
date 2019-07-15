@@ -55,24 +55,21 @@ function setVersicolorActivations() {
 
 function setSetosaActivations() {
   turnAllOff();
+  result.html();
   for (var i=0; i < causePars.length; i++) {
     causePars[i].html('')
   };
-  network.nodes[0].on = true;
-  network.nodes[3].on = true;
-  network.nodes[6].on = true;
-  network.nodes[10].on = true;
-  network.nodes[11].on = true;
-  network.nodes[12].on = true;
-  network.nodes[13].on = true;
-  network.nodes[14].on = true;
-  network.nodes[15].on = true;
-  result.html('Classification: 00, Iris setosa');
+  network.feedforward(1,0,0,1,0,0,1,0,0,0);
   network.currentSample = 'setosa';
   virginicaButton.class('unselected_sample');
   versicolorButton.class('unselected_sample');
   setosaButton.class('selected_sample');
   noiseButton.class('unselected_sample');
+  clearCauses(false, heatmap);
+  colorLayer(setosaActual, heatIL, 12, 0);
+  colorLayer(setosaActual, heatL1, 23, 10);
+  colorLayer(setosaActual, heatL2, 34, 14);
+  finalOutputs = [];
 }
 
 function setNoiseActivations() {
@@ -98,6 +95,8 @@ function layerCauseAnchor() {
     sampleAccount = actual; 
   } else if (network.currentSample == 'versicolor') {
     sampleAccount = versicolorActual;
+  } else if (network.currentSample == 'setosa') {
+    sampleAccount = setosaActual;
   } else {
     alert('Select a sample to generate an account of actual causation.');
     return;
@@ -118,6 +117,17 @@ function layerCauseAnchor() {
 
 function causeAnchor() {
   clean(false);
+  var sAlphas;
+  if (network.currentSample == 'virginica') {
+    sAlphas = alphas; 
+  } else if (network.currentSample == 'versicolor') {
+    sAlphas = versicolorAlphas;
+  } else if (network.currentSample == 'setosa') {
+    sAlphas = setosaAlphas;
+  } else {
+    alert('Select a sample to compute this alpha.');
+    return;
+  }
   for (var i=0; i < causePars.length; i++) {
     causePars[i].html('')
   }
@@ -130,7 +140,7 @@ function causeAnchor() {
   layersKey = int(sortedLayers.join(''));
   inNodes = causeNodesByLayer[sortedLayers[0]].sort().join(', ');
   outNodes = causeNodesByLayer[sortedLayers[1]].sort().join(', ');
-  alpha = alphas[layersKey][outNodes][inNodes];
+  alpha = sAlphas[layersKey][outNodes][inNodes];
   alphaBox.html('α = ' + str(alpha));
   // setVirginicaActivations();
 }
@@ -344,7 +354,7 @@ function clean(clearSelectedOutputs = true) {
 
 function nodeSelected(node) {
   clean(false);
-  setVirginicaActivations();
+  //setVirginicaActivations();
   var nodeObject = network.nodes[node];
   nodeObject.selected = !nodeObject.selected;
   if (nodeObject.selected) {
