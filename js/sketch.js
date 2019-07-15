@@ -59,13 +59,28 @@ function setup() {
   title = createElement('h4', 'Enter 10 comma-separated binary digits');
   title.position(400, 60);
 
-  info = createElement('p', 'Default activations based on an input of 1,0,1,0,1,1,0,1,1,0');
-  info.position(400, 90);
+  // info = createElement('p', 'Default activations based on an input of 1,0,1,0,1,1,0,1,1,0');
+  // info.position(400, 90);
 
-  resetButton = createButton('Reset to Defaults');
-  resetButton.position(400, 110);
-  resetButton.hide();
-  resetButton.mousePressed(setVirginicaActivations);
+  virginicaButton = createButton('Run Virginica');
+  virginicaButton.position(400, 105);
+  virginicaButton.class('unselected_sample');
+  virginicaButton.mousePressed(setVirginicaActivations);
+
+  versicolorButton = createButton('Run Versicolor');
+  versicolorButton.position(490, 105);
+  versicolorButton.mousePressed(setVersicolorActivations);
+  versicolorButton.class('unselected_sample');
+
+  setosaButton = createButton('Run Setosa');
+  setosaButton.position(585, 105);
+  setosaButton.mousePressed(setSetosaActivations);
+  setosaButton.class('unselected_sample');
+
+  noiseButton = createButton('Run Noise');
+  noiseButton.position(663, 105);
+  noiseButton.mousePressed(setNoiseActivations);
+  noiseButton.class('unselected_sample');
 
   classTitle = createElement('h2', 'Sample classification');
   classTitle.position(400, 30);
@@ -201,7 +216,7 @@ function setup() {
   for (i=0;i<allNodes.length;i++) {
       network.addNode(allNodes[i]);
   }
-  setVirginicaActivations();
+  // setVirginicaActivations();
   drawHeatMap();
 } 
 
@@ -246,9 +261,6 @@ function drawHeatMap() {
     new Node(cornW+180, cornH+45+33.75+22.5, 'sigmoid', 104, heatR, heatR),
     new Node(cornW+180, cornH+45+33.75+45, 'sigmoid', 104, heatR, heatR)
   ];
-  colorLayer(heatIL, 12, 0);
-  colorLayer(heatL1, 23, 10);
-  colorLayer(heatL2, 34, 14);
   connectLayers(heatmap, heatIL, heatL1, weights1);
   connectLayers(heatmap, heatL1, heatL2, weights2);
   connectLayers(heatmap, heatL2, heatOL, weights3);

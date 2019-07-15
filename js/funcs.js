@@ -17,16 +17,79 @@ var causePars = [];
 
 function setVirginicaActivations() {
   turnAllOff();
+  // network.nodes[0].on = true;
+  // network.nodes[2].on = true;
+  // network.nodes[4].on = true;
+  // network.nodes[5].on = true;
+  // network.nodes[7].on = true;
+  // network.nodes[8].on = true;
+  // network.nodes[10].on = true;
+  // network.nodes[12].on = true;
+  // network.nodes[18].on = true;
+  // result.html('Classification: 01, Iris virginica');
+  network.feedforward(1,0,1,0,1,1,0,1,1,0)
+  network.currentSample = 'virginica';
+  virginicaButton.class('selected_sample');
+  versicolorButton.class('unselected_sample');
+  setosaButton.class('unselected_sample');
+  noiseButton.class('unselected_sample');
+  colorLayer(heatIL, 12, 0);
+  colorLayer(heatL1, 23, 10);
+  colorLayer(heatL2, 34, 14);
+}
+
+function setVersicolorActivations() {
+  turnAllOff();
+  // network.nodes[0].on = true;
+  // network.nodes[2].on = true;
+  // network.nodes[4].on = true;
+  // network.nodes[5].on = true;
+  // network.nodes[7].on = true;
+  // network.nodes[9].on = true;
+  // network.nodes[10].on = true;
+  // network.nodes[14].on = true;
+  // network.nodes[16].on = true;
+  // network.nodes[17].on = true;
+  network.feedforward(1,0,1,0,1,1,0,1,0,1)
+  // result.html('Classification: 10, Iris versicolor');
+  network.currentSample = 'versicolor';
+  virginicaButton.class('unselected_sample');
+  versicolorButton.class('selected_sample');
+  setosaButton.class('unselected_sample');
+  noiseButton.class('unselected_sample');
+}
+
+function setSetosaActivations() {
+  turnAllOff();
   network.nodes[0].on = true;
-  network.nodes[2].on = true;
-  network.nodes[4].on = true;
-  network.nodes[5].on = true;
-  network.nodes[7].on = true;
-  network.nodes[8].on = true;
+  network.nodes[3].on = true;
+  network.nodes[6].on = true;
   network.nodes[10].on = true;
+  network.nodes[11].on = true;
   network.nodes[12].on = true;
+  network.nodes[13].on = true;
+  network.nodes[14].on = true;
+  network.nodes[15].on = true;
+  result.html('Classification: 00, Iris setosa');
+  network.currentSample = 'setosa';
+  virginicaButton.class('unselected_sample');
+  versicolorButton.class('unselected_sample');
+  setosaButton.class('selected_sample');
+  noiseButton.class('unselected_sample');
+}
+
+function setNoiseActivations() {
+  turnAllOff();
+  network.nodes[5].on = true;
+  network.nodes[12].on = true;
+  network.nodes[17].on = true;
   network.nodes[18].on = true;
-  result.html('Classification: 01, Iris virginica');
+  result.html('Classification: 11, Not a known species');
+  network.currentSample = 'noise';
+  virginicaButton.class('unselected_sample');
+  versicolorButton.class('unselected_sample');
+  setosaButton.class('unselected_sample');
+  noiseButton.class('selected_sample');
 }
 
 function layerCauseAnchor() {
@@ -210,7 +273,7 @@ function run() {
   clean();
   result.html('');
   info.html('');
-  resetButton.show();
+  // resetButton.show();
   causationButton.hide();
   layerCausationButton.hide();
   causationBody.html('Selected nodes: None');

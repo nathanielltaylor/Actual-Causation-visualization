@@ -32,6 +32,13 @@ html, body {
     width: 80px;
     background: red;
   }
+  .selected_sample {
+    background: red;
+    height: 22px;
+  }
+  .unselected_sample {
+    height: 22px;
+  }
   canvas {
     display: block;
     background-color: #eee;

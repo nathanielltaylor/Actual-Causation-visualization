@@ -44,6 +44,7 @@
     this.nodes = [];
     this.connections = [];
     this.position = createVector(x, y);
+    this.currentSample = 'virginica';
     
     this.addNode = function(n) {
       this.nodes.push(n);
