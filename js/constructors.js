@@ -178,6 +178,8 @@
         // fill(color(255-255*this.causeLevel, 255-255*this.causeLevel, 255));
         //red color scheme -> 0.7 coefficient captures diversity across range of values over 1
         fill(color(255, 255-255*this.causeLevel*.7, 255-255*this.causeLevel*.7));
+      } else if (this.layer == 104) {
+        fill('grey');
       }
       ellipse(this.position.x, this.position.y, this.r, this.r);
       this.r = lerp(this.r,this.default_r,0.1);
