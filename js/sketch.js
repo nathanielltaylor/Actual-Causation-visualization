@@ -270,14 +270,14 @@ function drawHeatMap() {
   }
 }
 
-function colorLayer(layer, idx, offset) {
-  var trans = actual[idx].split('\n').filter(x => x != "    ");
+function colorLayer(actual_account, layer, idx, offset) {
+  var trans = actual_account[idx].split('\n').filter(x => x != "    ");
   for (var i=0; i<trans.length; i++) {
     var r = parseCausationLine(trans[i]);
     for (var j=0; j<layer.length; j++) {
-      if (idx != 12) {
-        console.log(r['nodes']);
-      }
+      // if (idx != 12) {
+      //   console.log(r['nodes']);
+      // }
       if (r['nodes'].includes(j+offset)) {
         layer[j].causeLevel += r['alpha'];
       }

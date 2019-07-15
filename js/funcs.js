@@ -17,6 +17,10 @@ var causePars = [];
 
 function setVirginicaActivations() {
   turnAllOff();
+  for (var i=0; i < causePars.length; i++) {
+    causePars[i].html('')
+  };
+  result.html('');
   // network.nodes[0].on = true;
   // network.nodes[2].on = true;
   // network.nodes[4].on = true;
@@ -26,20 +30,26 @@ function setVirginicaActivations() {
   // network.nodes[10].on = true;
   // network.nodes[12].on = true;
   // network.nodes[18].on = true;
-  // result.html('Classification: 01, Iris virginica');
-  network.feedforward(1,0,1,0,1,1,0,1,1,0)
+  network.feedforward(1,0,1,0,1,1,0,1,1,0);
+  //result.html('Classification: 01, Iris virginica');
   network.currentSample = 'virginica';
   virginicaButton.class('selected_sample');
   versicolorButton.class('unselected_sample');
   setosaButton.class('unselected_sample');
   noiseButton.class('unselected_sample');
-  colorLayer(heatIL, 12, 0);
-  colorLayer(heatL1, 23, 10);
-  colorLayer(heatL2, 34, 14);
+  clearCauses(false, heatmap);
+  colorLayer(actual, heatIL, 12, 0);
+  colorLayer(actual, heatL1, 23, 10);
+  colorLayer(actual, heatL2, 34, 14);
+  finalOutputs = [];
 }
 
 function setVersicolorActivations() {
   turnAllOff();
+  result.html('');
+  for (var i=0; i < causePars.length; i++) {
+    causePars[i].html('')
+  };
   // network.nodes[0].on = true;
   // network.nodes[2].on = true;
   // network.nodes[4].on = true;
@@ -50,17 +60,25 @@ function setVersicolorActivations() {
   // network.nodes[14].on = true;
   // network.nodes[16].on = true;
   // network.nodes[17].on = true;
-  network.feedforward(1,0,1,0,1,1,0,1,0,1)
-  // result.html('Classification: 10, Iris versicolor');
+  network.feedforward(1,0,1,0,1,1,0,1,0,1);
+  //result.html('Classification: 10, Iris versicolor');
   network.currentSample = 'versicolor';
   virginicaButton.class('unselected_sample');
   versicolorButton.class('selected_sample');
   setosaButton.class('unselected_sample');
   noiseButton.class('unselected_sample');
+  clearCauses(false, heatmap);
+  colorLayer(versicolorActual, heatIL, 12, 0);
+  colorLayer(versicolorActual, heatL1, 23, 10);
+  colorLayer(versicolorActual, heatL2, 34, 14);
+  finalOutputs = [];
 }
 
 function setSetosaActivations() {
   turnAllOff();
+  for (var i=0; i < causePars.length; i++) {
+    causePars[i].html('')
+  };
   network.nodes[0].on = true;
   network.nodes[3].on = true;
   network.nodes[6].on = true;
@@ -80,6 +98,9 @@ function setSetosaActivations() {
 
 function setNoiseActivations() {
   turnAllOff();
+  for (var i=0; i < causePars.length; i++) {
+    causePars[i].html('')
+  };
   network.nodes[5].on = true;
   network.nodes[12].on = true;
   network.nodes[17].on = true;
@@ -93,12 +114,21 @@ function setNoiseActivations() {
 }
 
 function layerCauseAnchor() {
+  var sampleAccount;
+  if (network.currentSample == 'virginica') {
+    sampleAccount = actual; 
+  } else if (network.currentSample == 'versicolor') {
+    sampleAccount = versicolorActual;
+  } else {
+    alert('Select a sample to generate an account of actual causation.');
+    return;
+  }
   for (var i=0; i < causePars.length; i++) {
     causePars[i].html('')
   };
   sortedLayers = causalityLayers.sort();
   layersKey = int(sortedLayers.join(''));
-  var ac = actual[layersKey].split('\n');
+  var ac = sampleAccount[layersKey].split('\n');
   for (var i=0; i < ac.length; i++) {
     var x = createElement('p', ac[i]);
     x.position(950, 340+i*10);
@@ -123,14 +153,14 @@ function causeAnchor() {
   outNodes = causeNodesByLayer[sortedLayers[1]].sort().join(', ');
   alpha = alphas[layersKey][outNodes][inNodes];
   alphaBox.html('α = ' + str(alpha));
-  setVirginicaActivations();
+  // setVirginicaActivations();
 }
 
-function clearCauses(clearSelectedOutputs) {
-  for (i=0;i<network.nodes.length;i++) {
-    network.nodes[i].causeLevel = 0;
+function clearCauses(clearSelectedOutputs, nw) {
+  for (i=0;i<nw.nodes.length;i++) {
+    nw.nodes[i].causeLevel = 0;
     if (clearSelectedOutputs == true) {
-      network.nodes[i].selected = false;
+      nw.nodes[i].selected = false;
     }
   }
   if (clearSelectedOutputs) {
@@ -272,7 +302,7 @@ function selectLayer(layer, node) {
 function run() {
   clean();
   result.html('');
-  info.html('');
+  // info.html('');
   // resetButton.show();
   causationButton.hide();
   layerCausationButton.hide();
@@ -329,7 +359,7 @@ function turnAllOff() {
 }
 
 function clean(clearSelectedOutputs = true) {
-  clearCauses(clearSelectedOutputs);
+  clearCauses(clearSelectedOutputs, network);
   turnAllOff();
 }
 
