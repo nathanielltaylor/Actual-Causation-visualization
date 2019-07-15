@@ -1,7 +1,4 @@
 var versicolorActual = {
-    //need to manually update these indices
-    //then check heatmap works
-    //then make these versions print when they do the layer relationship buttons
     12: `α = 0.3536  [n9] ◀━━ [n10]
     \nα = 0.5123  [n9] ◀━━ [n11]
     \nα = 1.0  [n6] ◀━━ [n12]

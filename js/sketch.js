@@ -94,7 +94,7 @@ function setup() {
   causationDescription = createElement('p', 'To display the strength of a specific causal link select two sets of node from two different layers in the graph. For all actual causes select full two layers.');
   causationDescription.position(950, 80)
 
-  causationBody = createElement('p', 'Causation calculations are based on an input of 1,0,1,0,1,1,0,1,1,0');
+  causationBody = createElement('p', 'Causation calculations are based on the currently selected sample.');
   causationBody.position(950, 150);
 
   causationBody = createElement('p', '');

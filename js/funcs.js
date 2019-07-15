@@ -21,17 +21,7 @@ function setVirginicaActivations() {
     causePars[i].html('')
   };
   result.html('');
-  // network.nodes[0].on = true;
-  // network.nodes[2].on = true;
-  // network.nodes[4].on = true;
-  // network.nodes[5].on = true;
-  // network.nodes[7].on = true;
-  // network.nodes[8].on = true;
-  // network.nodes[10].on = true;
-  // network.nodes[12].on = true;
-  // network.nodes[18].on = true;
   network.feedforward(1,0,1,0,1,1,0,1,1,0);
-  //result.html('Classification: 01, Iris virginica');
   network.currentSample = 'virginica';
   virginicaButton.class('selected_sample');
   versicolorButton.class('unselected_sample');
@@ -50,18 +40,7 @@ function setVersicolorActivations() {
   for (var i=0; i < causePars.length; i++) {
     causePars[i].html('')
   };
-  // network.nodes[0].on = true;
-  // network.nodes[2].on = true;
-  // network.nodes[4].on = true;
-  // network.nodes[5].on = true;
-  // network.nodes[7].on = true;
-  // network.nodes[9].on = true;
-  // network.nodes[10].on = true;
-  // network.nodes[14].on = true;
-  // network.nodes[16].on = true;
-  // network.nodes[17].on = true;
   network.feedforward(1,0,1,0,1,1,0,1,0,1);
-  //result.html('Classification: 10, Iris versicolor');
   network.currentSample = 'versicolor';
   virginicaButton.class('unselected_sample');
   versicolorButton.class('selected_sample');
