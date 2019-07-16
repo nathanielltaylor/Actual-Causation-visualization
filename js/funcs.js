@@ -74,19 +74,21 @@ function setSetosaActivations() {
 
 function setNoiseActivations() {
   turnAllOff();
+  result.html('');
   for (var i=0; i < causePars.length; i++) {
     causePars[i].html('')
   };
-  network.nodes[5].on = true;
-  network.nodes[12].on = true;
-  network.nodes[17].on = true;
-  network.nodes[18].on = true;
-  result.html('Classification: 11, Not a known species');
+  network.feedforward(0,0,0,0,0,1,0,0,0,0)
   network.currentSample = 'noise';
   virginicaButton.class('unselected_sample');
   versicolorButton.class('unselected_sample');
   setosaButton.class('unselected_sample');
   noiseButton.class('selected_sample');
+  clearCauses(false, heatmap);
+  colorLayer(noiseActual, heatIL, 12, 0);
+  colorLayer(noiseActual, heatL1, 23, 10);
+  colorLayer(noiseActual, heatL2, 34, 14);
+  finalOutputs = [];
 }
 
 function layerCauseAnchor() {
@@ -97,6 +99,8 @@ function layerCauseAnchor() {
     sampleAccount = versicolorActual;
   } else if (network.currentSample == 'setosa') {
     sampleAccount = setosaActual;
+  } else if (network.currentSample == 'noise') {
+    sampleAccount = noiseActual;
   } else {
     alert('Select a sample to generate an account of actual causation.');
     return;
@@ -116,7 +120,7 @@ function layerCauseAnchor() {
 }
 
 function causeAnchor() {
-  clean(false);
+  // clean(false);
   var sAlphas;
   if (network.currentSample == 'virginica') {
     sAlphas = alphas; 
@@ -124,6 +128,8 @@ function causeAnchor() {
     sAlphas = versicolorAlphas;
   } else if (network.currentSample == 'setosa') {
     sAlphas = setosaAlphas;
+  } else if (network.currentSample == 'noise') {
+    sAlphas = noiseAlphas;
   } else {
     alert('Select a sample to compute this alpha.');
     return;
