@@ -2,16 +2,6 @@ var network;
 let il, hl1, hl2, ol, weights1, weights2, weights3, input, button, title, result;
 
 weights1 = [
-  // [ 0.82810175,  0.431847  , -0.6114574 ,  0.26991272],
-  // [ 0.38643757,  0.0724497 ,  0.11731126,  0.532698  ],
-  // [-0.22434753,  0.18346816, -0.5205485 ,  0.20109114],
-  // [ 0.26289812,  0.70143336, -0.3273399 , -0.58420587],
-  // [ 0.17094621,  0.05579785, -0.2422998 ,  0.08053707],
-  // [ 0.03981959, -0.9085541 ,  0.6328834 , -0.0238213 ],
-  // [-0.46575934,  1.2543691 ,  0.23838411, -1.5902231 ],
-  // [-0.1890925 ,  0.52258563,  0.43458605, -0.3423414 ],
-  // [-0.7142476 , -0.06031533,  0.44454348, -0.21594076],
-  // [ 0.35396498, -0.66391367, -0.68615705,  0.29617062]
   [ 0.7017474 ,  0.72755164,  0.11551751, -0.45833752],
   [ 0.32857415,  0.22942406, -0.26565427,  0.03623967],
   [ 0.03793271,  0.47218153, -0.4352291 ,  0.01359654],
@@ -25,10 +15,6 @@ weights1 = [
 ]
 
 weights2 = [
-  // [ 0.42995495, -0.40290686, -1.8035071 ],
-  // [ 1.3750908 ,  1.523359  , -0.22550218],
-  // [-0.05440376,  0.16083112,  1.8929248 ],
-  // [-0.67914736, -1.2037599 , -1.0936055 ]
   [ 2.9806962 , -0.47667038, -0.05533997],
   [ 1.7298535 ,  1.8376377 ,  0.28910208],
   [-0.60753185,  0.74215406, -2.7312975 ],
@@ -36,9 +22,6 @@ weights2 = [
 ]
 
 weights3 = [
-  // [-2.4198363 , -0.8200313 ],
-  // [-1.9390317 ,  1.0962626 ],
-  // [-0.40043405,  3.3466845 ]
   [ 0.18212856, -3.6634855 ],
   [-3.2627506 , -0.26446375],
   [ 2.2612166 , -0.40060785]
@@ -58,9 +41,6 @@ function setup() {
 
   title = createElement('h4', 'Enter 10 comma-separated binary digits');
   title.position(400, 60);
-
-  // info = createElement('p', 'Default activations based on an input of 1,0,1,0,1,1,0,1,1,0');
-  // info.position(400, 90);
 
   virginicaButton = createButton('Run Virginica');
   virginicaButton.position(400, 105);
@@ -112,9 +92,6 @@ function setup() {
   layerCausationButton.position(1150, 280);
   layerCausationButton.mousePressed(layerCauseAnchor);
   layerCausationButton.hide();
-
-  // accountBox = createElement('div', '');
-  // accountBox.position(950, 310);
 
   alphaBox = createElement('h3', '');
   alphaBox.position(950, 340);
@@ -216,7 +193,6 @@ function setup() {
   for (i=0;i<allNodes.length;i++) {
       network.addNode(allNodes[i]);
   }
-  // setVirginicaActivations();
   drawHeatMap();
 } 
 
@@ -227,69 +203,4 @@ function draw() {
   heatmap.update();
   heatmap.display();
   labelNodes();
-}
-
-function drawHeatMap() {
-  heatmap = new Network(width*.5, height*.7);
-  var cornW = -30;
-  var cornH = -90;
-  var heatR = 15;
-  heatIL = [
-    new Node(cornW, cornH, 'input', 101, heatR, heatR),
-    new Node(cornW, cornH+25, 'input', 101, heatR, heatR),
-    new Node(cornW, cornH+50, 'input', 101, heatR, heatR),
-    new Node(cornW, cornH+75, 'input', 101, heatR, heatR),
-    new Node(cornW, cornH+100, 'input', 101, heatR, heatR),
-    new Node(cornW, cornH+125, 'input', 101, heatR, heatR),
-    new Node(cornW, cornH+150, 'input', 101, heatR, heatR),
-    new Node(cornW, cornH+175, 'input', 101, heatR, heatR),
-    new Node(cornW, cornH+200, 'input', 101, heatR, heatR),
-    new Node(cornW, cornH+225, 'input', 101, heatR, heatR)
-  ];
-  heatL1 = [
-    new Node(cornW+60, cornH+45, 'tanh', 102, heatR, heatR),
-    new Node(cornW+60, cornH+90, 'tanh', 102, heatR, heatR),
-    new Node(cornW+60, cornH+135, 'tanh', 102, heatR, heatR),
-    new Node(cornW+60, cornH+180, 'tanh', 102, heatR, heatR)
-  ];
-  heatL2 = [
-    new Node(cornW+120, cornH+45+33.75, 'tanh', 103, heatR, heatR),
-    new Node(cornW+120, cornH+45+67.5, 'tanh', 103, heatR, heatR),
-    new Node(cornW+120, cornH+45+101.25, 'tanh', 103, heatR, heatR)
-  ];
-  heatOL = [
-    new Node(cornW+180, cornH+45+33.75+22.5, 'sigmoid', 104, heatR, heatR),
-    new Node(cornW+180, cornH+45+33.75+45, 'sigmoid', 104, heatR, heatR)
-  ];
-  connectLayers(heatmap, heatIL, heatL1, weights1);
-  connectLayers(heatmap, heatL1, heatL2, weights2);
-  connectLayers(heatmap, heatL2, heatOL, weights3);
-  heatNodes = heatIL.concat(heatL1, heatL2, heatOL);
-  for (i=0;i<heatNodes.length;i++) {
-    heatmap.addNode(heatNodes[i]);
-  }
-}
-
-function colorLayer(actual_account, layer, idx, offset) {
-  var trans = actual_account[idx].split('\n').filter(x => x != "    ");
-  for (var i=0; i<trans.length; i++) {
-    var r = parseCausationLine(trans[i]);
-    for (var j=0; j<layer.length; j++) {
-      // if (idx != 12) {
-      //   console.log(r['nodes']);
-      // }
-      if (r['nodes'].includes(j+offset)) {
-        layer[j].causeLevel += r['alpha'];
-      }
-    }
-  }
-}
-
-function parseCausationLine(line) {
-  var alpha = float(line.split('[')[0].split('=')[1]);
-  var causeNodes = line.split('[')[1].split(']')[0].split(',').map(x => int(x.replace(/\s+/, "").substring(1)));
-  return {
-    'alpha': alpha / causeNodes.length,
-    'nodes': causeNodes
-  }
 }
