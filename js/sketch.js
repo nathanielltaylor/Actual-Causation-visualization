@@ -40,8 +40,8 @@ function setup() {
   // button.position(input.x + input.width, 135);
   // button.mousePressed(run);
 
-  title = createElement('h4', 'Enter 10 comma-separated binary digits');
-  title.position(400, 60);
+  title = createElement('p', 'Select one of the following Iris samples to perform analysis.');
+  title.position(400, 63);
 
   virginicaButton = createButton('Run Virginica');
   virginicaButton.position(400, 105);
@@ -66,13 +66,16 @@ function setup() {
   classTitle = createElement('h2', 'Sample classification');
   classTitle.position(400, 30);
 
-  result = createElement('h4', '');
+  showInputSample = createElement('p', '');
+  showInputSample.position(400, 120);
+
+  result = createElement('p', '');
   result.position(400, 145);
 
   causationTitle = createElement('h2', 'Actual Causation');
   causationTitle.position(950, 30);
 
-  causationDescription = createElement('p', 'To display the strength of a specific causal link select two sets of node from two different layers in the graph. For all actual causes select full two layers.');
+  causationDescription = createElement('p', 'To display the strength of a specific causal link select a sample and two sets of node from two different layers in the graph. For all actual causes select a sample and full two layers.');
   causationDescription.position(950, 80)
 
   causationBody = createElement('p', 'Causation calculations are based on the currently selected sample.');

@@ -5,6 +5,7 @@ function setVirginicaActivations() {
     };
     result.html('');
     network.feedforward(1,0,1,0,1,1,0,1,1,0);
+    showInputSample.html('Input sample: 1,0,1,0,1,1,0,1,1,0');
     network.currentSample = 'virginica';
     virginicaButton.class('selected_sample');
     versicolorButton.class('unselected_sample');
@@ -24,6 +25,7 @@ function setVirginicaActivations() {
       causePars[i].html('')
     };
     network.feedforward(1,0,1,0,1,1,0,1,0,1);
+    showInputSample.html('Input sample: 1,0,1,0,1,1,0,1,0,1');
     network.currentSample = 'versicolor';
     virginicaButton.class('unselected_sample');
     versicolorButton.class('selected_sample');
@@ -43,6 +45,7 @@ function setVirginicaActivations() {
       causePars[i].html('')
     };
     network.feedforward(1,0,0,1,0,0,1,0,0,0);
+    showInputSample.html('Input sample: 1,0,0,1,0,0,1,0,0,0');
     network.currentSample = 'setosa';
     virginicaButton.class('unselected_sample');
     versicolorButton.class('unselected_sample');
@@ -61,7 +64,8 @@ function setVirginicaActivations() {
     for (var i=0; i < causePars.length; i++) {
       causePars[i].html('')
     };
-    network.feedforward(0,0,0,0,0,1,0,0,0,0)
+    network.feedforward(0,0,0,0,0,1,0,0,0,0);
+    showInputSample.html('Input sample: 0,0,0,0,0,1,0,0,0,0');
     network.currentSample = 'noise';
     virginicaButton.class('unselected_sample');
     versicolorButton.class('unselected_sample');
