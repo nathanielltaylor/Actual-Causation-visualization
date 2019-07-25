@@ -31,13 +31,14 @@ function setup() {
   createCanvas(1280, 800);
   background('#eee');
 
-  input = createInput();
-  input.position(400, 135);
+  //Allow classification of user-provided samples
+  // input = createInput();
+  // input.position(400, 135);
 
-  button = createButton('Submit');
-  button.id('submit_button')
-  button.position(input.x + input.width, 135);
-  button.mousePressed(run);
+  // button = createButton('Submit');
+  // button.id('submit_button')
+  // button.position(input.x + input.width, 135);
+  // button.mousePressed(run);
 
   title = createElement('h4', 'Enter 10 comma-separated binary digits');
   title.position(400, 60);
@@ -97,22 +98,22 @@ function setup() {
   alphaBox.position(950, 340);
 
   layer1Button = createButton('Select Layer 1');
-  layer1Button.position(950, 700);
+  layer1Button.position(950, 660);
   layer1Button.mousePressed(selectLayer1);
   layer1Button.class('layer_button');
 
   layer2Button = createButton('Select Layer 2');
-  layer2Button.position(1050, 700);
+  layer2Button.position(1050, 660);
   layer2Button.mousePressed(selectLayer2);
   layer2Button.class('layer_button');
 
   layer3Button = createButton('Select Layer 3');
-  layer3Button.position(1150, 700);
+  layer3Button.position(1150, 660);
   layer3Button.mousePressed(selectLayer3);
   layer3Button.class('layer_button');
 
   layer4Button = createButton('Select Layer 4');
-  layer4Button.position(1250, 700);
+  layer4Button.position(1250, 660);
   layer4Button.mousePressed(selectLayer4);
   layer4Button.class('layer_button');
 
@@ -120,34 +121,34 @@ function setup() {
   dlayer1Button.position(950, 700);
   dlayer1Button.mousePressed(deselectLayer1);
   dlayer1Button.class('dlayer_button');
-  dlayer1Button.hide();
+  // dlayer1Button.hide();
 
   dlayer2Button = createButton('Clear Layer 2');
   dlayer2Button.position(1050, 700);
   dlayer2Button.mousePressed(deselectLayer2);
   dlayer2Button.class('dlayer_button');
-  dlayer2Button.hide();
+  // dlayer2Button.hide();
 
   dlayer3Button = createButton('Clear Layer 3');
   dlayer3Button.position(1150, 700);
   dlayer3Button.mousePressed(deselectLayer3);
   dlayer3Button.class('dlayer_button');
-  dlayer3Button.hide();
+  // dlayer3Button.hide();
 
   dlayer4Button = createButton('Clear Layer 4');
   dlayer4Button.position(1250, 700);
   dlayer4Button.mousePressed(deselectLayer4);
   dlayer4Button.class('dlayer_button');
-  dlayer4Button.hide();
+  // dlayer4Button.hide();
 
   textAlign(CENTER);
   textSize(50);
 
   creditBox = createElement('p', 'Visualization by Nathaniel Taylor.');
   creditBox.position(20, 675);
-  //decide where to move this to make room for heatmap
-  // creditBox2 = createElement('div', 'Signal pulse animation is adapted from open source code released by Simon Tiger.');
-  // creditBox2.position(20, 715);
+
+  creditBox2 = createElement('div', 'Signal pulse animation is adapted from open source code released by Simon Tiger.');
+  creditBox2.position(20, 715);
 
   network = new Network(width/2, height/2-100);
   r = 32;

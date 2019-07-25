@@ -22,8 +22,8 @@ function twoLayersSelected(l) {
       }
       layersFull[l] = true;
       printSelectedNodes();
-      sb.hide();
-      cb.show();
+      // sb.hide();
+      // cb.show();
     }
   }
   
@@ -52,8 +52,8 @@ function twoLayersSelected(l) {
     causalityLayers = causalityLayers.filter(w => w != l);
     layersFull[l] = false;
     printSelectedNodes();
-    sb.show();
-    cb.hide();
+    // sb.show();
+    // cb.hide();
     alphaBox.html('');
   }
   
