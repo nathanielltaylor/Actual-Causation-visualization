@@ -40,7 +40,7 @@ function setVirginicaActivations() {
   
   function setSetosaActivations() {
     turnAllOff();
-    result.html();
+    result.html('');
     for (var i=0; i < causePars.length; i++) {
       causePars[i].html('')
     };
