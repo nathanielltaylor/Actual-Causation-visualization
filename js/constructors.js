@@ -177,8 +177,8 @@
       if (this.causeLevel != 0) {
         // //blue color scheme
         // fill(color(255-255*this.causeLevel, 255-255*this.causeLevel, 255));
-        //red color scheme -> 0.7 coefficient captures diversity across range of values over 1
-        fill(color(255, 255-255*this.causeLevel*.7, 255-255*this.causeLevel*.7));
+        //red color scheme -> 0.6 coefficient captures diversity across range of values over 1
+        fill(color(255, 255-255*this.causeLevel*.6, 255-255*this.causeLevel*.6));
       } else if (this.layer == 104) {
         fill('grey');
       }
