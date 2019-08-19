@@ -37,7 +37,7 @@ function layerCauseAnchor() {
   var ac = sampleAccount[layersKey].split('\n');
   for (var i=0; i < ac.length; i++) {
     var x = createElement('p', ac[i]);
-    x.position(950, 340+i*10);
+    x.position(950, 320+i*10);
     causePars[i] = x;
   }
   alphaBox.html('');
