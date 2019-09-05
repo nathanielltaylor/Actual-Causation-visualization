@@ -28,7 +28,7 @@ weights3 = [
 ]
 
 function setup() { 
-  createCanvas(1280, 800);
+  createCanvas(1140, 800);
   background('#eee');
 
   //Allow classification of user-provided samples
@@ -158,35 +158,36 @@ function setup() {
   //centerpoint is (640, 300)
   
   il = [
-    new Node(-600, -270, 'input', 1, r),
-    new Node(-600, -200, 'input', 1, r),
-    new Node(-600, -130, 'input', 1, r),
-    new Node(-600, -60, 'input', 1, r),
-    new Node(-600, 10, 'input', 1, r),
-    new Node(-600, 80, 'input', 1, r),
-    new Node(-600, 150, 'input', 1, r),
-    new Node(-600, 220, 'input', 1, r),
-    new Node(-600, 290, 'input', 1, r),
-    new Node(-600, 360, 'input', 1, r)
+    //+140
+    new Node(-530, -270, 'input', 1, r),
+    new Node(-530, -200, 'input', 1, r),
+    new Node(-530, -130, 'input', 1, r),
+    new Node(-530, -60, 'input', 1, r),
+    new Node(-530, 10, 'input', 1, r),
+    new Node(-530, 80, 'input', 1, r),
+    new Node(-530, 150, 'input', 1, r),
+    new Node(-530, 220, 'input', 1, r),
+    new Node(-530, 290, 'input', 1, r),
+    new Node(-530, 360, 'input', 1, r)
   ]
   
   hl1 = [
-    new Node(-400, -144, 'tanh', 2, r),
-    new Node(-400, -18, 'tanh', 2, r),
-    new Node(-400, 108, 'tanh', 2, r),
-    new Node(-400, 234, 'tanh', 2, r)
+    new Node(-330, -144, 'tanh', 2, r),
+    new Node(-330, -18, 'tanh', 2, r),
+    new Node(-330, 108, 'tanh', 2, r),
+    new Node(-330, 234, 'tanh', 2, r)
   ]
 
   hl2 = [
-      new Node(-200, -49.5, 'tanh', 3, r),
-      new Node(-200, 45, 'tanh', 3, r),
-      new Node(-200, 139.5, 'tanh', 3, r)
+      new Node(-130, -49.5, 'tanh', 3, r),
+      new Node(-130, 45, 'tanh', 3, r),
+      new Node(-130, 139.5, 'tanh', 3, r)
   ]
 
   ol = [
     //slightly wider spaced than other layers
-    new Node(0, 0, 'sigmoid', 4, r),
-    new Node(0, 90, 'sigmoid', 4, r)
+    new Node(70, 0, 'sigmoid', 4, r),
+    new Node(70, 90, 'sigmoid', 4, r)
   ]
   
   connectLayers(network, il, hl1, weights1);
