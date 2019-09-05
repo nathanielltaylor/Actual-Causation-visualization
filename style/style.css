@@ -3,7 +3,7 @@ html, body {
     padding: 0;
     color: #657b83;
     font-family: Roboto,Lato,'Helvetica Neue',Helvetica,sans-serif;
-    background-color: #eee;
+    background-color: #white;
   }
   button {
     background: #2aa198;
@@ -41,5 +41,5 @@ html, body {
   }
   canvas {
     display: block;
-    background-color: #eee;
+    background-color:white;
   }

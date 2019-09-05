@@ -29,7 +29,7 @@ weights3 = [
 
 function setup() { 
   createCanvas(1140, 800);
-  background('#eee');
+  background('white');
 
   //Allow classification of user-provided samples
   // input = createInput();
@@ -202,7 +202,7 @@ function setup() {
 } 
 
 function draw() { 
-  background('#eee');
+  background('white');
   network.update();
   network.display();
   heatmap.update();
